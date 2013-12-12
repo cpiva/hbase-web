@@ -1,6 +1,34 @@
-<html>
-    <h1>ECRR</h1>
+<html xmlns:th="http://thymeleaf.org">
+    <h1>ECRR Party</h1>
 	<body>
-		Congratulations!
+		<table border="1">
+			<tr>
+				<th>id:</th> <td th:text="${party.id}"/>
+			</tr>
+                       	<tr>
+                                <th>desc:</th> <td th:text="${party.desc}"/>
+                       	</tr>
+                       	<tr>
+                                <th>type:</th> <td th:text="${party.type}"/>
+                        </tr>
+                       	<tr>
+                                <th>start_dttm:</th> <td th:text="${party.startDttm}"/>
+                        </tr>
+                      	<tr>
+                                <th>end_dttm:</th> <td th:text="${party.endDttm}"/>
+                        </tr>
+                        <tr>
+                                <th>status_code:</th> <td th:text="${party.statusCode}"/>
+                        </tr>
+                        <tr>
+                                <th>status_desc:</th> <td th:text="${party.statusDesc}"/>
+                        </tr>
+                        <tr>
+                                <th>language_code:</th> <td th:text="${party.languageCode}"/>
+                        </tr>
+                        <tr>
+                                <th>event_id:</th> <td th:text="${party.eventId}"/>
+                        </tr>
+		</table>
 	</body>
 </html>
