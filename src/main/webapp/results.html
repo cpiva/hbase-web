@@ -50,5 +50,26 @@
             </tr>
         </table>
 
+        <h2>Agreements</h2>
+
+        <table border="1" cellspacing="2" cellpadding="2">
+            <tr th:each="agreement : ${agreements}">
+                <td th:text="'id: ' + ${agreement.id}"></td>
+                <td th:text="'start_dttm: ' + ${agreement.startDttm}"></td>
+                <td th:text="'end_dttm: ' + ${agreement.endDttm}"></td> 
+                <td th:text="'desc: ' + ${agreement.desc}"></td> 
+                <td th:text="'reason_code: ' + ${agreement.reasonCode}"></td> 
+                <td th:text="'reason_text: ' + ${agreement.reasonText}"></td> 
+                <td th:text="'description: ' + ${agreement.description}"></td> 
+                <td th:text="'type_desc: ' + ${agreement.typeDesc}"></td> 
+                <td th:text="'currency_code: ' + ${agreement.currencyCode}"></td> 
+                <td th:text="'currency_desc: ' + ${agreement.currencyDesc}"></td> 
+                <td th:text="'status_code: ' + ${agreement.statusCode}"></td> 
+                <td th:text="'lob_category: ' + ${agreement.lobCategory}"></td> 
+                <td th:text="'lob_name: ' + ${agreement.lobName}"></td> 
+                <td th:text="'event_id: ' + ${agreement.eventId}"></td>
+            </tr>
+        </table>
+
 	</body>
 </html>

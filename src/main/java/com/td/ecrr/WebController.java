@@ -16,9 +16,13 @@ import com.cloudera.cdk.data.Key;
 import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 
+import com.cloudera.cdk.hbase.data.Agreement;
 import com.cloudera.cdk.hbase.data.Party;
 import com.cloudera.cdk.hbase.data.Address;
 import com.cloudera.cdk.hbase.data.PartyAddress;
+import com.cloudera.cdk.hbase.data.PartyAgreement;
+import com.cloudera.cdk.hbase.data.service.AgreementDatasetService;
+import com.cloudera.cdk.hbase.data.service.PartyAgreementDatasetService;
 import com.cloudera.cdk.hbase.data.service.PartyDatasetService;
 import com.cloudera.cdk.hbase.data.service.AddressDatasetService;
 import com.cloudera.cdk.hbase.data.service.EventDatasetService;
@@ -31,6 +35,8 @@ public class WebController {
     PartyDatasetService partyDatasetService = new PartyDatasetService();
     AddressDatasetService addressDatasetService = new AddressDatasetService();
     PartyAddressDatasetService partyAddressDatasetService = new PartyAddressDatasetService();
+    AgreementDatasetService agreementDatasetService = new AgreementDatasetService();
+    PartyAgreementDatasetService partyAgreementDatasetService = new PartyAgreementDatasetService();
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String showForm(PartyRequest partyRequest) {
@@ -48,13 +54,24 @@ public class WebController {
         Party party;
         List<PartyAddress> partyAddresses;
         List<Address> addresses = new ArrayList<Address>(); 
+        List<PartyAgreement> partyAgreements;
+        List<Agreement> agreements = new ArrayList<Agreement>(); 
 
         try {
             party = partyDatasetService.get(partyRequest.getId().toString());
+            
+            // Address
             partyAddresses = partyAddressDatasetService.scan(partyRequest.getId().toString());
             for(PartyAddress partyAddress : partyAddresses){
                 addresses.add(addressDatasetService.get(partyAddress.getValue().toString()));
             }
+            
+            // Agreement
+            partyAgreements = partyAgreementDatasetService.scan(partyRequest.getId().toString());
+            for(PartyAgreement partyAgreement : partyAgreements){
+                agreements.add(agreementDatasetService.get(partyAgreement.getValue().toString()));
+            }
+            
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("error","An error occurred.");
@@ -67,6 +84,7 @@ public class WebController {
         
         model.addAttribute("party", party);
         model.addAttribute("addresses", addresses);
+        model.addAttribute("agreements", agreements);
 
         return "results";
     }
