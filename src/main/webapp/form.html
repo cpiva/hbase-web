@@ -1,16 +1,21 @@
 <html>
+
     <h1>ECRR</h1>
+    
 	<body>
 		<form action="#" th:action="@{/}" th:object="${partyRequest}" method="post">
+			
 			<table>
 				<tr>
 					<td>Party id:</td>
 					<td><input type="text" th:field="*{id}" /></td>
-					<td><div id="errors" th:text="${error}" /></td>
+					
 				</tr>
 			</table>
 
 			<button type="submit">Submit</button>
+
+			<p style="color:red;" id="errors" th:text="${error}" />
 
 		</form>
 	</body>

@@ -35,14 +35,14 @@ public class WebController {
         }
         Party party = null;
         try {
-          party = partyDatasetService.get(partyRequest.getId().toString());  
+            party = partyDatasetService.get(partyRequest.getId().toString());  
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("error","An error occurred.");
             return "redirect:/";	
         }
         if (party == null){
-            redirectAttributes.addFlashAttribute("message","Party id not found.");
+            redirectAttributes.addFlashAttribute("error","Party id not found.");
             return "redirect:/";   
         }
         model.addAttribute("party", party);    
