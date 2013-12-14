@@ -17,6 +17,7 @@ import com.cloudera.cdk.data.RandomAccessDataset;
 import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 
 import com.cloudera.cdk.hbase.data.Party;
+import com.cloudera.cdk.hbase.data.Address;
 import com.cloudera.cdk.hbase.data.PartyAddress;
 import com.cloudera.cdk.hbase.data.service.PartyDatasetService;
 import com.cloudera.cdk.hbase.data.service.AddressDatasetService;
@@ -46,10 +47,14 @@ public class WebController {
 
         Party party;
         List<PartyAddress> partyAddresses;
+        List<Address> addresses = new ArrayList<Address>(); 
 
         try {
             party = partyDatasetService.get(partyRequest.getId().toString());
             partyAddresses = partyAddressDatasetService.scan(partyRequest.getId().toString());
+            for(PartyAddress partyAddress : partyAddresses){
+                addresses.add(addressDatasetService.get(partyAddress.getValue().toString()));
+            }
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("error","An error occurred.");
@@ -61,7 +66,7 @@ public class WebController {
         }
         
         model.addAttribute("party", party);
-        model.addAttribute("partyAddresses", partyAddresses);  
+        model.addAttribute("addresses", addresses);
 
         return "results";
     }

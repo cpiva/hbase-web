@@ -2,10 +2,13 @@
     <style type="text/css">
     th {text-align:right;}
     </style>
-    <h1>ECRR Party</h1>
+    <h1>ECRR</h1>
 	<body>
-    
+        
+        <h2>Party</h2>
+
 		<table border="1" cellspacing="2" cellpadding="2">
+
 			<tr>
 				<th>id:</th> <td th:text="${party.id}"/>
 			</tr>
@@ -35,7 +38,17 @@
             </tr>
 		</table>
         
-        <p th:text="${partyAddresses}"/>
+        <h2>Addresses</h2>
+
+        <table border="1" cellspacing="2" cellpadding="2">
+            <tr th:each="address : ${addresses}">
+                <td th:text="'id: ' + ${address.id}"></td>
+                <td th:text="'start_dttm: ' + ${address.startDttm}"></td>
+                <td th:text="'end_dttm: ' + ${address.endDttm}"></td> 
+                <td th:text="'address_role: ' + ${address.addressRole}"></td> 
+                <td th:text="'event_id: ' + ${address.eventId}"></td>
+            </tr>
+        </table>
 
 	</body>
 </html>
