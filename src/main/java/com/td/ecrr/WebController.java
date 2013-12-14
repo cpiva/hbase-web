@@ -15,11 +15,16 @@ import com.cloudera.cdk.data.RandomAccessDatasetRepository;
 
 import com.cloudera.cdk.hbase.data.Party;
 import com.cloudera.cdk.hbase.data.service.PartyDatasetService;
+import com.cloudera.cdk.hbase.data.service.AddressDatasetService;
+import com.cloudera.cdk.hbase.data.service.EventDatasetService;
+
 
 @Controller
 public class WebController {
 
+    //TODO: Change this to proper bean injections via spring annotations..
     PartyDatasetService partyDatasetService = new PartyDatasetService();
+    AddressDatasetService addressDatasetService = new AddressDatasetService();
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String showForm(PartyRequest partyRequest) {
@@ -35,7 +40,8 @@ public class WebController {
         }
         Party party = null;
         try {
-            party = partyDatasetService.get(partyRequest.getId().toString());  
+            party = partyDatasetService.get(partyRequest.getId().toString());
+            address = addressDatasetService.get(party.getAddressId())  
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("error","An error occurred.");
