@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.cloudera.cdk.hbase.data.Address;
-import com.cloudera.cdk.hbase.data.Agreement;
-import com.cloudera.cdk.hbase.data.Party;
-import com.cloudera.cdk.hbase.data.PartyAddress;
-import com.cloudera.cdk.hbase.data.PartyAgreement;
+import com.cloudera.cdk.hbase.data.avro.Address;
+import com.cloudera.cdk.hbase.data.avro.Agreement;
+import com.cloudera.cdk.hbase.data.avro.Party;
+import com.cloudera.cdk.hbase.data.avro.PartyAddress;
+import com.cloudera.cdk.hbase.data.avro.PartyAgreement;
 import com.cloudera.cdk.hbase.data.service.AddressDatasetService;
 import com.cloudera.cdk.hbase.data.service.AgreementDatasetService;
 import com.cloudera.cdk.hbase.data.service.PartyAddressDatasetService;
